@@ -1,0 +1,33 @@
+<div class="col-sm-3 col-md-3 col-lg-2">
+    <div id="sidebar-wrapper" class="offcanvas-xs">
+        <div class="inner">
+            <p ng-hide="checkIfEmpty()" class="text-center">There is no feeds yet</p>
+            <nav class="navmenu navmenu-default img-responsive" ng-show="checkIfEmpty()" >
+                <div class="navbar-default sidebar " role="navigation">
+                    <div class="sidebar-nav" >
+                        <ul class="nav" id="side-menu">
+                            <li class="show-all-feeds" ng-click="getAllFeedItems()">
+                                <a><span><i class="fa fa-globe" aria-hidden="true"></i></span> Show all</a>
+                            </li>
+                            <li class="dropdown-toggle" ng-repeat="category in sortedFeeds">
+                                <a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>{{category.name}}</a>
+                                <ul class="nav nav-second-level">
+                                    <li ng-repeat="feed in category.feeds" ng-click="setSelectedFeed(feed)">
+                                        <a >{{feed.title}}</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        </ul>
+                    </div><!--sidebar-nav-->
+                </div><
+            </nav>
+            <div class="text-center">
+                <button class="btn btn-action" ui-sref="dashboard.addFeed"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add feed</button>
+            </div>
+        </div>
+    </div><!--sidebar-wrapper-->
+
+
+</div>
+<!--setSelectedSubcategory(subcategory.id)-->

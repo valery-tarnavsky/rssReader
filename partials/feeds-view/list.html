@@ -1,0 +1,26 @@
+<div class="feed-item feed-item-mobile col-lg-12 col-md-12 "  ng-repeat="feed in filteredFeeds | orderBy : date : reverse" data-ui-sref="dashboard.fullPost({fullPost: feed})">
+    <div class="inner">
+        <div class="row">
+            <div class="col-lg-11 col-xs-10">
+                <div class="feed-item-content">
+                    <div class="article-title">
+                        <h3><img class="favicon"  ng-src="https://www.google.com/s2/favicons?domain={{feed.link}}">{{feed.title}}</h3>
+                    </div>
+                    <div class="article-content hidden-xs">
+                        <span>{{feed.content}}</span>
+                    </div>
+                </div><!--feed-item-content-->
+            </div>
+            <div class="col-lg-1 col-xs-2">
+                <div class="feed-item-footer">
+                    <div class="feed-item-btn-group text-center">
+                        <ul>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-share-alt" aria-hidden="true"></i></li>
+                        </ul>
+                    </div>
+                </div><!-- feed-item-footer -->
+            </div>
+        </div>
+    </div><!--inner-->
+</div><!--feed-item-->

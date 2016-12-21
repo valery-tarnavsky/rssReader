@@ -1,0 +1,33 @@
+/*------------------------------------------
+  Responsive Grid Media Queries - 1280, 1024, 768, 480
+   1280-1024   - desktop (default grid)
+   1024-768    - tablet landscape
+   768-480     - tablet
+   480-less    - phone landscape & smaller
+--------------------------------------------*/
+
+
+@media screen and (min-width: 480px) and (max-width: 768px) {
+  .article-title h3{
+    white-space: pre-wrap !important;
+    overflow: visible!important;
+    line-height: 1.5;
+      }
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+
+
+
+
+
+
+

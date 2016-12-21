@@ -1,0 +1,44 @@
+<div id="add-feed-wrapper">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+            <form class="form-horizontal" name="addFeedForm"   role="form">
+                <div class="col-xs-12">
+                    <h1 class="text-center">New feed</h1>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="url">Url:</label>
+                        <div class="col-sm-7">
+                            <input type="url" id="url" ng-model="feedLink" class="form-control form-input" placeholder="Enter url">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="col-sm-3 control-label">Category: </label>
+                        <div class="col-sm-7">
+                            <select id="category" ng-model="selectedCategory" ng-options="category for category in categories" ng-change="checkIfCustom()" class="form-control form-input" >
+                                <option value="">Choose</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div id="add-new-category" class="form-group" ng-show="customCategory">
+                        <label for="new-category" class="col-sm-3 control-label">New Category: </label>
+                        <div class="col-sm-7">
+                            <input id="new-category" ng-model="newCustomCategory" class="form-control form-input" placeholder="Enter category name" maxlength="25">
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" id="add-feed-btn-submit" ng-click="validation()"  class="btn btn-action" ><i class="fa fa-check-circle-o" aria-hidden="true"></i> Add feed</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br> <br>
+    <div class="row">
+        <!--<div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+           &lt;!&ndash; <div class="alert alert-warning" ng-show='error' >Please, enter rss feed url or category</div>&ndash;&gt;
+            <div class="alert alert-success" ng-show='valid' >feed has successfully added </div>
+        </div>-->
+    </div>
+
+</div><!--add-feed-wrapper-->

@@ -1,0 +1,32 @@
+
+    <h1>NASA Breaking News</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-group " role="group">
+                            <span class="change-view-btn-group">
+                                <button type="button" class="btn" ui-sref="dashboard.list" ui-sref-active="active">
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn"  ui-sref="dashboard.th-list" ui-sref-active="active">
+                                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn hidden-xs" ui-sref="dashboard.th-large" ui-sref-active="active">
+                                    <i class="fa fa-th-large" aria-hidden="true"></i>
+                                </button>
+                            </span>
+
+                <div class="btn-group sort-feed-btn" role="group">
+                    <button type="button" class="dropdown-toggle btn btn-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> Sort
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="sort(0)">Newest</a></li>
+                        <li><a ng-click="sort(1)">Oldest</a></li>
+                    </ul>
+                </div>
+
+                <button type="button" class="btn btn-link"><i class="fa fa-trash" aria-hidden="true"></i> Remove feed</button>
+            </div>
+        </div>
+    </div>

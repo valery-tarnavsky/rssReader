@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title></title>
+    <link rel="stylesheet" href="libs/metisMenu/metisMenu.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link rel="stylesheet" href="libs/animate/animate.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+
+
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#sidebar-wrapper" data-canvas="#content-wrapper" >
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <button type="button" class="user-toggle-btn visible-xs collapsed" data-toggle="collapse" data-target="#user-navbar">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                </button>
+                <a class="navbar-brand" href="#">Rss Reader</a>
+            </div>
+            <div id="user-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="user-info-big dropdown hidden-xs">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <img class="img-circle" src="https://lh5.googleusercontent.com/-MPMq6Qoz9hQ/AAAAAAAAAAI/AAAAAAAAABc/opkYB197kso/photo.jpg?sz=200" class="user-image" >
+                            <span class="hidden-xs">valery.tarnavsky@gmail.com</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <li class="user-info-header">
+                                <img class="img-circle" src="https://lh5.googleusercontent.com/-MPMq6Qoz9hQ/AAAAAAAAAAI/AAAAAAAAABc/opkYB197kso/photo.jpg?sz=200" >
+                            </li>
+                            <li class="user-info-footer">
+                                <div class="pull-left">
+                                    <button class="btn btn-action" id="profile_btn"><i class="fa fa-user" aria-hidden="true"></i> Profile</button>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-action" id="sign_out"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </li><!-- /user-info-lg-->
+                    <div class="user-info-small visible-xs">
+                        <button type="button" class="close" aria-label="Close" data-toggle="collapse" data-target="#user-navbar"><span aria-hidden="true">&times;</span></button>
+                        <li class="user-info-header">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="text-center">
+                                          <img class="img-circle" src="https://lh5.googleusercontent.com/-MPMq6Qoz9hQ/AAAAAAAAAAI/AAAAAAAAABc/opkYB197kso/photo.jpg?sz=200" >
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="text-center">
+                                        <span>valery.tarnavsky@gmail.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="user-info-footer">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="text-center">
+                                        <button class="btn btn-action"><i class="fa fa-user" aria-hidden="true"></i> Profile</button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="text-center">
+                                        <button class="btn btn-action"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+    </nav><!--/navbar-->
+</header>
+
+<section id="dashboard" >
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-2">
+            <div id="sidebar-wrapper" class="offcanvas-xs">
+                <div class="inner">
+                    <nav class="navmenu navmenu-default img-responsive ">
+                        <div class="navbar-default sidebar " role="navigation">
+                            <div class="sidebar-nav">
+                                <ul class="nav" id="side-menu">
+                                    <li class="show-all-feeds">
+                                        <a href="#"><span><i class="fa fa-globe" aria-hidden="true"></i></span> Show all</a>
+                                    </li>
+                                    <li class="dropdown-toggle">
+                                        <a  href="#"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> IT</a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="flot.html">Flot Charts</a>
+                                            </li>
+                                            <li>
+                                                <a href="morris.html">Morris.js Charts</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-second-level -->
+                                    </li>
+                                    <li class="dropdown-toggle">
+                                        <a href="#"><i class="fa fa-arrow-circle-o-right " aria-hidden="true"></i> Music</a>
+                                        <ul class="nav nav-second-level">
+                                            <li>
+                                                <a href="blank.html">Blank Page</a>
+                                            </li>
+                                            <li>
+                                                <a href="login.html">Login Page</a>
+                                            </li>
+                                        </ul>
+                                        <!-- /.nav-second-level -->
+                                    </li>
+                                </ul>
+                            </div><!--sidebar-nav-->
+                        </div><!--inner-->
+                        <div class="text-center">
+                            <button class="btn btn-action"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add feed</button>
+                        </div>
+                    </nav>
+                </div>
+            </div><!--sidebar-wrapper-->
+        </div>
+
+        <div id="content-wrapper" class="col-md-9 col-sm-9 col-lg-10 col-lg-offset-2">
+            <div id="add-feed-wrapper">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3">
+                        <form class="form-horizontal add-feed-form" role="form">
+                            <div class="col-xs-12">
+                                <h1 class="text-center">New feed</h1>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-3" for="url">Url:</label>
+                                    <div class="col-sm-7">
+                                        <input type="url" id="url" class="form-control form-input" placeholder="Enter url">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="category" class="col-sm-3 control-label">Category: </label>
+                                    <div class="col-sm-7">
+                                        <select id="category" class="form-control form-input">
+                                            <option translate="" value="" disabled="" selected="selected" hidden="" class="">Choose</option>
+                                            <option label="News" value="News">News</option>
+                                            <option label="IT" value="IT">IT</option>
+                                            <option label="Sport" value="Sport">Sport</option>
+                                            <option label="Design" value="Design">Design</option>
+                                            <option label="Movies" value="Movies">Movies</option>
+                                            <option label="Music" value="Music">Music</option>
+                                            <option label="Culture" value="Culture">Culture</option>
+                                            <option label="Nature" value="Nature">Nature</option>
+                                            <option label="Gaming" value="Gaming">Gaming</option>
+                                            <option label="Food" value="Food">Food</option>
+                                            <option label="Economics" value="Economics">Economics</option>
+                                            <option label="Science" value="Science">Science</option>
+                                            <option label="Custom" value="Custom">Custom</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="add-new-category" class="form-group hide">
+                                    <label for="new-category" class="col-sm-3 control-label">New Category: </label>
+                                    <div class="col-sm-7">
+                                        <input id="new-category" class="form-control form-input" placeholder="Enter category name" maxlength="25">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" id="add-feed-btn-submit" class="btn btn-action" ><i class="fa fa-check-circle-o" aria-hidden="true"></i> Add feed</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div><!--add-feed-wrapper-->
+        </div><!-- content-wrapper -->
+    </div>
+</section>
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <p><i class="fa fa-copyright" aria-hidden="true"></i> Rss Reader 2016 </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/56b3df6b7f.js"></script>
+<script src="libs/metisMenu/metisMenu.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+<script src="libs/offcanvas.js"></script>
+<script src="js/common.js"></script>
+
+
+
+
+</body>
+</html>
+
+

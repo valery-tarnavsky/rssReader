@@ -1,0 +1,24 @@
+/* Common */
+
+
+/* Font */
+$titleFont: 'Roboto Condensed', sans-serif;
+$defaultFont: 'Roboto', sans-serif;
+$fontSize: 16px;
+
+/* Color */
+$white: #ffffff;
+$blue: #488FD1;
+$darkBlue: /*#34495e*/ #343F5F;
+$gray: #5a6b7d;
+$lightGray:#EDF2F8;
+$turquoise: #1bbc9b;
+
+/* mixin */
+@mixin transition($prop, $values...) {
+  -moz-#{$prop}: $values;
+  -ms-#{$prop}: $values;
+  -o-#{$prop}: $values;
+  -webkit-#{$prop}: $values;
+  $prop: $values;
+}
