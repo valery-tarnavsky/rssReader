@@ -19,7 +19,7 @@ angular.module('rssReader').factory('AddFeedService',['$http', function($http) {
     }
 
     function getXmlFeed(url) {
-        return $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&output=xml&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)).
+        return $http.jsonp('https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&output=xml&num=10&callback=JSON_CALLBACK&q=' + encodeURIComponent(url)).
         then(function(response) {
             parseXml (response.data.responseData.xmlString);
         });
@@ -118,7 +118,6 @@ angular.module('rssReader').factory('AddFeedService',['$http', function($http) {
         getXmlFeed      : getXmlFeed,
         addNewCategory  : addNewCategory,
         setFeedCategory : setFeedCategory
-
     };
 
 }]);

@@ -33,8 +33,8 @@ rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams',
 
     $scope.$watch(function(){
         return GetFeedService.getSelectedFeed();
-    }, function(){
-        $scope.getContent();
+    }, function(newValue, oldValue){
+        newValue ? $scope.getContent() : false;
     }, true);
 
     $scope.hideFeedHeader = function(){
