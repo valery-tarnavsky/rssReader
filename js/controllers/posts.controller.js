@@ -1,5 +1,5 @@
-rssReader.controller('PostsController', ['$scope', '$state', '$stateParams', '$filter', 'AddFeedService', function($scope, $state, $stateParams, $filter, AddFeedService) {
-    $scope.feedItems = AddFeedService.getFeedItems();
+rssReader.controller('PostsController', ['$scope', '$state', '$stateParams', '$filter', 'feedDataService', function($scope, $state, $stateParams, $filter, feedDataService) {
+    $scope.feedItems = feedDataService.getFeedItems();
     $scope.fullPost = {};
     $scope.feedId = +$stateParams.feedId;
     if($scope.feedId){

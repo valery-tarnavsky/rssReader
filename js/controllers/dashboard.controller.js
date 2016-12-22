@@ -1,6 +1,6 @@
-rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'AddFeedService', function($scope, $state, $stateParams, $filter, AddFeedService) {
-    $scope.feedItems = AddFeedService.getFeedItems();
-    $scope.feeds = AddFeedService.getFeeds();
+rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'feedDataService', function($scope, $state, $stateParams, $filter, feedDataService) {
+    $scope.feedItems = feedDataService.getFeedItems();
+    $scope.feeds = feedDataService.getFeeds();
 
 
     /* sort feeds*/

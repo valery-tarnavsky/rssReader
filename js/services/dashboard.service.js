@@ -1,4 +1,4 @@
-angular.module('rssReader').factory('GetFeedService',['AddFeedService', function(AddFeedService) {
+angular.module('rssReader').factory('dashboardService',['feedDataService', function(feedDataService) {
     var selectedFeed;
 
     function setSelectedFeed(feed){

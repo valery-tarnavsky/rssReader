@@ -1,8 +1,9 @@
-angular.module('rssReader').controller('AddFeedController', ['$scope', '$state', 'AddFeedService', 'GetFeedService', function ($scope, $state, AddFeedService, GetFeedService) {
+angular.module('rssReader').controller('AddFeedController', ['$scope', '$state', 'feedDataService', function ($scope, $state, feedDataService) {
 
-    $scope.categories = AddFeedService.getCategories();
+    $scope.categories = feedDataService.getCategories();
+
     $scope.getFeeds = function() {
-        AddFeedService.getXmlFeed($scope.feedLink);
+        feedDataService.getXmlFeed($scope.feedLink);
     };
 
     $scope.customCategory = false;
@@ -11,15 +12,15 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
     };
 
     $scope.addNewCategory = function () {
-        AddFeedService.addNewCategory($scope.newCustomCategory);
+        feedDataService.addNewCategory($scope.newCustomCategory);
     };
 
     $scope.setFeedCategory = function() {
         if ($scope.customCategory){
             $scope.addNewCategory();
-            AddFeedService.setFeedCategory($scope.newCustomCategory);
+            feedDataService.setFeedCategory($scope.newCustomCategory);
         }else{
-            AddFeedService.setFeedCategory($scope.selectedCategory);
+            feedDataService.setFeedCategory($scope.selectedCategory);
         }
     };
 

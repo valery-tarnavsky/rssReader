@@ -1,5 +1,5 @@
-rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', 'AddFeedService', 'GetFeedService', function($scope, $state, $stateParams, AddFeedService, GetFeedService) {
-    $scope.feeds = AddFeedService.getFeeds();
+rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', 'feedDataService', function($scope, $state, $stateParams, feedDataService) {
+    $scope.feeds = feedDataService.getFeeds();
 
     $scope.checkIfEmpty = function () {
         if($scope.feeds.length == 0){
