@@ -1,6 +1,7 @@
-rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'AddFeedService', 'GetFeedService', function($scope, $state, $stateParams, $filter, AddFeedService, GetFeedService) {
-    $scope.category = $state.params.category;
+rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'AddFeedService', function($scope, $state, $stateParams, $filter, AddFeedService) {
     $scope.feedItems = AddFeedService.getFeedItems();
+    $scope.feeds = AddFeedService.getFeeds();
+
 
     /* sort feeds*/
     $scope.reverse = false;
@@ -8,8 +9,10 @@ rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams',
         $scope.reverse = reverse;
     };
 
-    $scope.showFeedTitle = function(selectedFeedTitle){
-        $scope.feedTitle = selectedFeedTitle;
+    $scope.showFeedTitle = function(selectedFeedId){
+        angular.forEach($scope.feeds, function(item){
+            $scope.feedTitle = item.id == selectedFeedId ? item.title : '';
+        });
     };
 
     $scope.showFeedItems =  function(selectedFeedId){
@@ -17,25 +20,25 @@ rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams',
     };
 
     $scope.getSelectedFeed = function(){
-        $scope.feed = GetFeedService.getSelectedFeed();
-        $scope.showFeedTitle($scope.feed.title);
-        $scope.showFeedItems($scope.feed.id);
+        $scope.showFeedTitle($state.params.feed);
+        $scope.showFeedItems($state.params.feed);
     };
 
     $scope.getAllFeedItems =  function() {
         $scope.filteredFeeds = $scope.feedItems;
-        $scope.showFeedTitle("All");
+        $scope.feedTitle = "All"
     };
 
     $scope.getContent = function() {
-        $scope.category == "all" ? $scope.getAllFeedItems() : $scope.getSelectedFeed();
+        $state.params.type == "all" ? $scope.getAllFeedItems() : $scope.getSelectedFeed();
     };
 
-    $scope.$watch(function(){
-        return GetFeedService.getSelectedFeed();
-    }, function(newValue, oldValue){
-        newValue ? $scope.getContent() : false;
-    }, true);
+    $scope.$watchCollection(function(){
+        return $state.params;
+    }, function(){
+        $scope.getContent();
+    });
+
 
     $scope.hideFeedHeader = function(){
         return $state.includes('*.th-list') || $state.includes('*.list') || $state.includes('*.th-large');

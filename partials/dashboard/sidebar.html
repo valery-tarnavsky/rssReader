@@ -12,7 +12,7 @@
                             <li class="dropdown-toggle" ng-repeat="category in sortedFeeds">
                                 <a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>{{category.name}}</a>
                                 <ul class="nav nav-second-level">
-                                    <li ng-repeat="feed in category.feeds" ng-click="setSelectedFeed(feed)">
+                                    <li ng-repeat="feed in category.feeds" ng-click="getItemsByFeed(feed)">
                                         <a >{{feed.title}}</a>
                                     </li>
                                 </ul>

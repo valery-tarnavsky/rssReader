@@ -2,14 +2,14 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
     $scope.feeds = AddFeedService.getFeeds();
 
     $scope.checkIfEmpty = function () {
-        if(!$scope.feeds.length){
+        if($scope.feeds.length == 0){
             $state.go('dashboard.addFeed');
         }
         return $scope.feeds.length;
     };
 
     $scope.getAllFeedItems = function (){
-        $state.go("dashboard.th-large",{ category: 'all' });
+        $state.go("dashboard.th-large",{ type: 'all' });
     };
 
     function findIndex(arr, prop, val){
@@ -34,9 +34,8 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
         getFeedsByCategory();
     });
 
-    $scope.setSelectedFeed = function (selectedFeed){
-        GetFeedService.setSelectedFeed(selectedFeed);
-        $state.go('dashboard.th-large', { category: 'feed', feedId: selectedFeed.id });
+    $scope.getItemsByFeed = function (selectedFeed){
+        $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed.id});
     }
 
 

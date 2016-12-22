@@ -20,26 +20,27 @@ rssReader.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
             }
         },
         params: {
-            category: 'all'
+            type: 'all',
+            feed: ''
         }
     })
         .state({
             name: 'dashboard.list',
-            url: '/list?category',
+            url: '/list?type&feed',
             templateUrl: './partials/feeds-view/list.html',
-            controller: 'FeedViewController'
+            controller: 'DashboardController'
         })
         .state({
             name: 'dashboard.th-list',
-            url: '/th-list?category',
+            url: '/th-list?type&feed',
             templateUrl: './partials/feeds-view/th-list.html',
-            controller: 'FeedViewController'
+            controller: 'DashboardController'
         })
         .state({
             name: 'dashboard.th-large',
-            url: '/th-large?category',
+            url: '/th-large?type&feed',
             templateUrl: './partials/feeds-view/th-large.html',
-            controller: 'FeedViewController'
+            controller: 'DashboardController'
         })
         .state({
             name: 'dashboard.fullPost',

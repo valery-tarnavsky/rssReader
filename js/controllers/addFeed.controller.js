@@ -33,7 +33,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
    $scope.addNewFeed = function () {
        $scope.getFeeds();
        $scope.setFeedCategory();
-       $state.go('dashboard.th-large', { category: 'all'});
+       $state.go('dashboard.th-large', { type: 'all'});
     }
 
 }]);
