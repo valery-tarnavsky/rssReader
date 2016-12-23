@@ -9,7 +9,7 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
     };
 
     $scope.getAllFeedItems = function (){
-        $state.go("dashboard.th-large",{ type: 'all' });
+        $state.go("dashboard.th-large",{ type: 'all'});
     };
 
     function findIndex(arr, prop, val){
@@ -35,7 +35,7 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
     });
 
     $scope.getItemsByFeed = function (selectedFeed){
-        $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed.id});
+        $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed});
     }
 
 

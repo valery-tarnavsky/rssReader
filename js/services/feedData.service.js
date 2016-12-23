@@ -1,4 +1,4 @@
-angular.module('rssReader').factory('feedDataService',['$http', function($http) {
+angular.module('rssReader').factory('feedDataService',['$http',  function($http) {
     var categories = ["News","IT", "Design", "Sport", "Movies", "Music", "Culture", "Nature", "Gaming", "Food", "Economics", "Science", "Custom"];
     var feedCategory;
     var feeds = [];
@@ -12,6 +12,10 @@ angular.module('rssReader').factory('feedDataService',['$http', function($http) 
 
     function setFeedCategory (setFeedCategory){
         feedCategory = setFeedCategory;
+    }
+
+    function getFeedCategory(){
+        return feedCategory;
     }
 
 
@@ -35,10 +39,10 @@ angular.module('rssReader').factory('feedDataService',['$http', function($http) 
     function parseXml (xml){
         var parser = new DOMParser();
         var parsedXml = parser.parseFromString(xml, "text/xml");
-        createFeedObject(parsedXml, checkFeedFormat(parsedXml));
+        getRssFeed(parsedXml, checkFeedFormat(parsedXml));
     }
 
-    function createFeedObject(parsedXml) {
+    function getRssFeed(parsedXml) {
         var channel = parsedXml.getElementsByTagName('channel')[0];
         var feed = {
             id       : feedCounter++,
@@ -115,7 +119,8 @@ angular.module('rssReader').factory('feedDataService',['$http', function($http) 
         getFeedItems    : getFeedItems,
         getXmlFeed      : getXmlFeed,
         addNewCategory  : addNewCategory,
-        setFeedCategory : setFeedCategory
+        setFeedCategory : setFeedCategory,
+        getFeedCategory : getFeedCategory
     };
 
 }]);

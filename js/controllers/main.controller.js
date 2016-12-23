@@ -20,8 +20,7 @@ rssReader.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
             }
         },
         params: {
-            type: 'all',
-            feed: ''
+            type: 'all'
         }
     })
         .state({

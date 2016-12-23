@@ -1,16 +1,8 @@
-angular.module('rssReader').factory('dashboardService',['feedDataService', function(feedDataService) {
-    var selectedFeed;
+angular.module('rssReader').factory('dashboardService',['feedDataService', '$filter', function(feedDataService, $filter) {
 
-    function setSelectedFeed(feed){
-        selectedFeed = feed;
-    }
 
-    function getSelectedFeed(){
-        return selectedFeed;
-    }
 
     return {
-        setSelectedFeed : setSelectedFeed,
-        getSelectedFeed : getSelectedFeed
+
     };
 }]);

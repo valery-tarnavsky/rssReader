@@ -1,43 +1,28 @@
-rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'feedDataService', function($scope, $state, $stateParams, $filter, feedDataService) {
-    $scope.feedItems = feedDataService.getFeedItems();
-    $scope.feeds = feedDataService.getFeeds();
+rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'feedDataService', 'dashboardService', function($scope, $state, $stateParams, $filter, feedDataService, dashboardService) {
+    var feeds = feedDataService.getFeeds(),
+        feedItems = feedDataService.getFeedItems();
 
+    function getFeedItemsById(feedId){
+        return  $filter("filter")( feedItems, {feedId: feedId});
+    }
+
+    function getFeedTitleById(feedId){
+        var result = null;
+        angular.forEach(feeds, function(item){
+            if(item.id == feedId) {
+                result = item.title
+            }
+        });
+        return result;
+    }
+
+    $scope.feedTitle = $state.params.type == "all" ? "All" : getFeedTitleById($state.params.feed);
+    $scope.filteredFeeds =  $state.params.type == "all" ? feedItems :  getFeedItemsById($state.params.feed);
 
     /* sort feeds*/
-    $scope.reverse = false;
     $scope.sort = function(reverse){
         $scope.reverse = reverse;
     };
-
-    $scope.showFeedTitle = function(selectedFeedId){
-        angular.forEach($scope.feeds, function(item){
-            $scope.feedTitle = item.id == selectedFeedId ? item.title : '';
-        });
-    };
-
-    $scope.showFeedItems =  function(selectedFeedId){
-        $scope.filteredFeeds = $filter("filter")( $scope.feedItems, {feedId: selectedFeedId});
-    };
-
-    $scope.getSelectedFeed = function(){
-        $scope.showFeedTitle($state.params.feed);
-        $scope.showFeedItems($state.params.feed);
-    };
-
-    $scope.getAllFeedItems =  function() {
-        $scope.filteredFeeds = $scope.feedItems;
-        $scope.feedTitle = "All"
-    };
-
-    $scope.getContent = function() {
-        $state.params.type == "all" ? $scope.getAllFeedItems() : $scope.getSelectedFeed();
-    };
-
-    $scope.$watchCollection(function(){
-        return $state.params;
-    }, function(){
-        $scope.getContent();
-    });
 
 
     $scope.hideFeedHeader = function(){

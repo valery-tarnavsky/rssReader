@@ -7,7 +7,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
     };
 
     $scope.customCategory = false;
-   $scope.checkIfCustom = function () {
+    $scope.checkIfCustom = function () {
        $scope.customCategory = $scope.selectedCategory.toLowerCase() == 'custom';
     };
 
