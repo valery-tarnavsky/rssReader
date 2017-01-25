@@ -3,7 +3,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
     $scope.categories = feedDataService.getCategories();
 
     $scope.getFeeds = function() {
-        feedDataService.getXmlFeed($scope.feedLink);
+        feedDataService.getParsedFeeds($scope.feedLink);
     };
 
     $scope.customCategory = false;
@@ -25,6 +25,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
     };
 
     $scope.validation = function(){
+        $scope.submitted = true;
         if($scope.feedLink && $scope.selectedCategory && ($scope.customCategory ?  $scope.newCustomCategory : true)){
             $scope.addNewFeed();
         }else {
@@ -34,7 +35,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
    $scope.addNewFeed = function () {
        $scope.getFeeds();
        $scope.setFeedCategory();
-       $state.go('dashboard.th-large', { type: 'all'});
+       $state.go('dashboard.th-large', { type: 'all', feed: ''});
     }
 
 }]);

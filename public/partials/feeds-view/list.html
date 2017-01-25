@@ -1,0 +1,4 @@
+<list-view feed="feed" class="feed-item-mobile col-lg-12 col-md-12"
+           ng-repeat="feed in filteredFeeds | orderBy : date : reverse"
+           data-ui-sref="dashboard.fullPost({feedId: feed.id})"></list-view>
+

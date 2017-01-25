@@ -1,22 +1,22 @@
-rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', 'feedDataService', function($scope, $state, $stateParams, feedDataService) {
+rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '$window', 'feedDataService', function($scope, $state, $stateParams, $window, feedDataService) {
+    $scope.height = $window.innerHeight;
     $scope.feeds = feedDataService.getFeeds();
 
     $scope.checkIfEmpty = function () {
-        if($scope.feeds.length == 0){
-            $state.go('dashboard.addFeed');
-        }
         return $scope.feeds.length;
     };
 
-    $scope.getAllFeedItems = function (){
-        $state.go("dashboard.th-large",{ type: 'all'});
+    $scope.goToAddFeed = function(){
+        $state.go('dashboard.addFeed');
     };
+
+    $scope.checkIfEmpty() ? true : $scope.goToAddFeed();
 
     function findIndex(arr, prop, val){
         return arr.map(function(find) { return find[prop]; }).indexOf(val);
     }
 
-    function getFeedsByCategory() {
+    function sortFeedsByCategory() {
         $scope.sortedFeeds = [];
         angular.forEach($scope.feeds, function (feed) {
             var index = findIndex($scope.sortedFeeds, 'name', feed.category);
@@ -30,13 +30,19 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
             }
         });
     }
+
+
     $scope.$watch('feeds.length', function (){
-        getFeedsByCategory();
+        sortFeedsByCategory();
     });
 
     $scope.getItemsByFeed = function (selectedFeed){
         $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed});
-    }
+    };
+
+    $scope.getAllFeedItems = function (){
+        $state.go("dashboard.th-large",{ type: 'all'});
+    };
 
 
 }]);

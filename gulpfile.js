@@ -9,23 +9,23 @@ var gulp = require('gulp'),
    /* inject = require('gulp-inject')*/
 
 	gulp.task('sass', function () {
-		return gulp.src('./scss/**/*.scss')
+		return gulp.src('public/scss/**/*.scss')
 			.pipe(sass())
 			.pipe(autoprefixer({
 				cascade: true
 			}))
-			.pipe(gulp.dest('dist/css'))
+			.pipe(gulp.dest('public/dist/css'))
 			.pipe(sourcemaps.init())
 			.pipe(cssmin())
 			.pipe(rename({
 				suffix: '.min'
 			}))
 			.pipe(sourcemaps.write())
-			.pipe(gulp.dest('./css'));
+			.pipe(gulp.dest('public/css'));
 	});
 
 	gulp.task('watch', function() {
-    	gulp.watch('./scss/**/*.scss', ['sass']);
+    	gulp.watch('public/scss/**/*.scss', ['sass']);
     });
 	gulp.task('default', ['sass','watch']);
 
