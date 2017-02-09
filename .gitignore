@@ -1,0 +1,12 @@
+logs/*
+!.gitkeep
+node_modules/
+data/
+tmp
+.DS_Store
+.idea
+# Created by .ignore support plugin (hsz.mobi)
+/bower_components
+/.idea
+/client/coverage/
+coverage/

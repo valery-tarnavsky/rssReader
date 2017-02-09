@@ -1,10 +1,8 @@
 rssReader.controller('DashboardController', ['$scope', '$state', '$stateParams', '$filter', 'feedDataService', 'dashboardService', function($scope, $state, $stateParams, $filter, feedDataService, dashboardService) {
-    $scope.loading = feedDataService.getLoadStatus();
-    console.log($scope.loading);
-    var feeds = feedDataService.getFeeds(),
-        feedItems = feedDataService.getFeedItems(),
-        currentFeedId = $state.params.feed;
 
+    var feeds = feedDataService.getAllFeeds(),
+        feedItems = feedDataService.getFeeds(),
+        currentFeedId = $state.params.feed;
 
     function getFeedItemsById(feedId){
         return  $filter("filter")( feedItems, {feedId: feedId});

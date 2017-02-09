@@ -1,6 +1,6 @@
 rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '$window', 'feedDataService', function($scope, $state, $stateParams, $window, feedDataService) {
     $scope.height = $window.innerHeight;
-    $scope.feeds = feedDataService.getFeeds();
+    $scope.feeds = feedDataService.getAllFeeds();
 
     $scope.checkIfEmpty = function () {
         return $scope.feeds.length;
@@ -12,13 +12,13 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
 
     $scope.checkIfEmpty() ? true : $scope.goToAddFeed();
 
-    function findIndex(arr, prop, val){
+  /*  function findIndex(arr, prop, val){
         return arr.map(function(find) { return find[prop]; }).indexOf(val);
     }
 
     function sortFeedsByCategory() {
         $scope.sortedFeeds = [];
-        angular.forEach($scope.feeds, function (feed) {
+        angular.forEach($scope.feeds.value.data, function (feed) {
             var index = findIndex($scope.sortedFeeds, 'name', feed.category);
             if(index === -1){
                 $scope.sortedFeeds.push({
@@ -35,7 +35,7 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
     $scope.$watch('feeds.length', function (){
         sortFeedsByCategory();
     });
-
+*/
     $scope.getItemsByFeed = function (selectedFeed){
         $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed});
     };
