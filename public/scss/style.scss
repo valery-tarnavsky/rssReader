@@ -11,7 +11,6 @@ body{
 #wrapper{
   background-color: $lightGray;
   min-height: 100%;
-  height: auto !important;
   height: 100%;
   margin: 0 auto -60px;
 }
@@ -37,6 +36,14 @@ header {
       }
     i{
       color: $white;
+    }
+
+    .navbar-header{
+img {
+  float: left;
+  width: 50px;
+
+}
     }
 
     .navbar-toggle {

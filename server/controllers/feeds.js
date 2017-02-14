@@ -2,7 +2,9 @@ var mongoose   = require('mongoose'),
 	fs         = require("fs"),
 	FeedParser = require('feedparser'),
     request    = require('request'),
-	Feed       = mongoose.model('Feed');
+	Feed       = mongoose.model('Feed')/*,
+    FeedItems  = mongoose.model('FeedItems')*/;
+
 
 module.exports.getParsedFeed = function(req, res) {
 	var parsedFeed = [];
@@ -43,91 +45,39 @@ module.exports.getParsedFeed = function(req, res) {
 
 module.exports.addFeed = function(req, res) {
     Feed.find({}, function(error, feeds) {
-        var foundCategory = null;
-        var currentFeed;
-        if(feeds) {
-            feeds.forEach(function (feed) {
-                feed.category.forEach(function (category) {
-                    if (category.name === req.body.category) {
-                        foundCategory = category;
-                    }
-                });
-            });
-            var feed = new Feed();
-            if(foundCategory){
 
-                    var query = {'category.name': req.body.category};
-                    var newData = {
-                        title : req.body.title,
-                        entries : req.body.entries
-                    };
-                    Feed.findOneAndUpdate(query, newData, {upsert:true}, function(err, doc){
-                        if (err) {
-                            throw err;
-                        }
-                        console.log(doc);
-                    });
+        var currentFeed = null;
 
-
-         /*                      feeds.forEach(function(item){
-         if(item.category.name == foundCategory){
-                        console.log(item);
-                        item.category.feeds.push({
-                            title : req.body.title,
-                            entries : req.body.entries
-                        });
-                    }
-                })*/
-
-            }else {
-
-                feed.category.push({
-                    name : req.body.category,
-                    feeds: [{
-                        title : req.body.title,
-                        entries : req.body.entries
-                    }]
-                });
-                feed.save(function (err, feed) {
-                    if (err) {
-                        throw err;
-                    }
-                    res.json(feed);
-
-                });
+        feeds.forEach(function (feed) {
+            if (feed.category === req.body.category) {
+                currentFeed = feed;
             }
+        });
 
-
-
-
+        if(currentFeed) {
+            currentFeed.feedItems.push({
+                title: req.body.title,
+                entries: req.body.entries
+            });
+            currentFeed.save(function (err, feed) {
+                if (err) { throw err; }
+                res.json(feed);
+            });
+        }else {
+            var feed = new Feed({
+                 category: req.body.category
+            });
+            feed.feedItems.push({
+                title: req.body.title,
+                entries: req.body.entries
+            });
+            feed.save(function (err, feed) {
+                if (err) {throw err;}
+                res.json(feed);
+            });
         }
     });
 };
-
-
-
-/*module.exports.addFeed = function(req, res) {
-    Feed.findOne({title: req.body.title }, function(error, feed) {
-        if(feed) {
-            return res.send({
-                feed: feed
-            })
-        } else {
-            var feed = new Feed();
-            feed.category = req.body.category;
-            feed.title = req.body.title;
-            feed.entries = req.body.entries;
-            feed.markModified('entries');
-            feed.save(function(err){
-                if (err) {
-                    throw err;
-                }else{
-                    res.json(feed);
-                }
-            });
-        }
-    });
-};*/
 
 module.exports.getAllFeeds = function(req, res) {
     Feed.find({}, function(error, feeds) {
@@ -136,9 +86,14 @@ module.exports.getAllFeeds = function(req, res) {
                 err: "Error"
             })
         } else {
-
              res.send(feeds);
-                }
+        }
+    });
+};
 
+module.exports.removeFeed = function(req, res) {
+    Feed.findByIdAndRemove(req.body.id, function(err, user) {
+        if (err) throw err;
+        console.log(user);
     });
 };

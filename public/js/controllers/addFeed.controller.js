@@ -35,7 +35,7 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
    $scope.addNewFeed = function () {
        $scope.getFeeds();
        $scope.setFeedCategory();
-       $state.go('dashboard.th-large', { type: 'all', feed: ''});
+       $state.go('dashboard.th-large', { type: 'all', feed: null});
     }
 
 }]);

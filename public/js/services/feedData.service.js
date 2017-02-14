@@ -1,4 +1,4 @@
-angular.module('rssReader').factory('feedDataService',['$http',  function($http) {
+angular.module('rssReader').factory('feedDataService',['$http', '$window',  function($http, $window) {
     var categories = ["News","IT", "Design", "Sport", "Movies", "Music", "Culture", "Nature", "Gaming", "Food", "Economics", "Science", "Custom"];
     var feedCategory;
     var feeds = [];
@@ -13,31 +13,17 @@ angular.module('rssReader').factory('feedDataService',['$http',  function($http)
         feedCategory = setFeedCategory;
     }
 
-    /*function findIndex(arr, prop, val){
-        return arr.map(function(find) { return find[prop]; }).indexOf(val);
+    function removeFeed (feedId) {
+        return $http.delete("/deleteFeed/" + feedId).then(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
     }
 
-    function sortFeedsByCategory(data) {
-        var sortedFeeds = [];
-        return angular.forEach(data, function (feed) {
-            var index = findIndex(sortedFeeds, 'name', feed.category);
-            if(index === -1){
-                sortedFeeds.push({
-                    name: feed.category,
-                    feeds: [feed]
-                })
-            } else {
-                sortedFeeds[index].feeds.push(feed)
-            }
-
-            return sortedFeeds
-        });
-    }*/
 
     function getAllFeeds() {
         return $http.get('/getAllFeeds').then(function(response){
-            console.log(response);
-            return response;
+            return response.data;
         })
     }
 
@@ -51,24 +37,12 @@ angular.module('rssReader').factory('feedDataService',['$http',  function($http)
         return $http.post('/addFeed', {entries: entries, title: title, category : category})
             .then(function(res) {
                     console.log("response in getSavedFeed:", res);
+                    $window.location.href = '/';
                     return res;
             },function(error) {
                     console.log('Can not get saved feed');
             })
     }
-
-
-    /*function createFeedsArray(data) {
-        var feeds = [];
-        var feed = {
-            id        : feedCounter++,
-            title     : data[0]['meta']['rss:title']['#'],
-         /!*   category  : feedCategory,*!/
-            feedItems : createFeedItemsArray(data)
-        };
-        feeds.push(feed);
-        return feeds;
-    }*/
 
 
     function createFeedItemsArray(data) {
@@ -128,7 +102,8 @@ angular.module('rssReader').factory('feedDataService',['$http',  function($http)
         getParsedFeeds  : getParsedFeeds,
         addNewCategory  : addNewCategory,
         setFeedCategory : setFeedCategory,
-        getAllFeeds     : getAllFeeds
+        getAllFeeds     : getAllFeeds,
+        removeFeed      : removeFeed
     };
 
 }]);

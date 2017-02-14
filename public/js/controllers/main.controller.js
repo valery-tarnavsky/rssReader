@@ -19,6 +19,11 @@ rssReader.config(['$stateProvider', '$urlRouterProvider', function ($stateProvid
                 controller: 'SidebarController'
             }
         },
+        resolve: {
+            feedsPromise: ['feedDataService', function (feedDataService) {
+                return feedDataService.getAllFeeds();
+            }]
+        },
         params: {
             type: 'all'
         }

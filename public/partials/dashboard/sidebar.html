@@ -9,11 +9,11 @@
                             <li class="show-all-feeds" ng-click="getAllFeedItems()">
                                 <a><span><i class="fa fa-globe" aria-hidden="true"></i></span> Show all</a>
                             </li>
-                            <li class="dropdown-toggle" ng-repeat="category in sortedFeeds">
-                                <a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>{{category.name}}</a>
+                            <li class="dropdown-toggle" ng-repeat="category in feeds">
+                                <a><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>{{category.category}}</a>
                                 <ul class="nav nav-second-level">
-                                    <li ng-repeat="feed in category.feeds" ng-click="getItemsByFeed(feed.id)">
-                                        <a >{{feed.title}}</a>
+                                    <li ng-repeat="feedItem in category.feedItems" ng-click="getItemsByFeed(feedItem._id)">
+                                        <a >{{feedItem.title}}</a>
                                     </li>
                                 </ul>
                                 <!-- /.nav-second-level -->

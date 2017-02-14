@@ -10,6 +10,7 @@ var express    = require('express'),
     flash      = require('express-flash');
 
 require('./server/models/Feed');
+require('./server/models/FeedItems');
 var routes = require('./server/routes/index');
 
 mongoose.connect(process.env.DB_URL || 'mongodb://valery.tarnavsky:thisIsSparta!@ds145019.mlab.com:45019/rssreader');
