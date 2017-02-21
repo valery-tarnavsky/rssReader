@@ -14,10 +14,10 @@ html, body {
   height: 100%; }
 
 body {
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  background-color: #EDF2F8; }
 
 #wrapper {
-  background-color: #EDF2F8;
   min-height: 100%;
   height: 100%;
   margin: 0 auto -60px; }
@@ -309,6 +309,12 @@ h3 {
 .btn-action {
   background-color: #FE6658;
   color: #ffffff; }
+  .btn-action.disabled {
+    background-color: #b4585b;
+    /*color: #9fa5b4;*/
+    cursor: default; }
+    .btn-action.disabled:hover {
+      color: #ffffff; }
 
 .inner {
   padding: 15px;

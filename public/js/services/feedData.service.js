@@ -1,109 +1,93 @@
-angular.module('rssReader').factory('feedDataService',['$http', '$window',  function($http, $window) {
-    var categories = ["News","IT", "Design", "Sport", "Movies", "Music", "Culture", "Nature", "Gaming", "Food", "Economics", "Science", "Custom"];
-    var feedCategory;
-    var feeds = [];
+angular.module('rssReader').service('feedDataService',['$http', function($http) {
+    var that = this;
+    this.CATEGORIES = ["News","IT", "Design", "Sport", "Movies", "Music", "Culture", "Nature", "Gaming", "Food", "Economics", "Science"];
+    this.feeds = [];
 
-    var feedCounter = 1;
+    /* addFeed */
 
-    function addNewCategory(category){
-        categories.unshift(category);
+    this.getAllCategories = function () {
+        var result = that.CATEGORIES.concat(getCustomCategories());
+        result.push("Custom");
+        return result;
+    };
+
+    function getCurrentFeedCategories() {
+        var result = [];
+        that.feeds.forEach (function(feed){
+            result.push(feed.category);
+        });
+        return result;
     }
 
-    function setFeedCategory (setFeedCategory){
-        feedCategory = setFeedCategory;
+    function getCustomCategories(){
+        var current = getCurrentFeedCategories();
+        return current.filter(function (elem) {
+            return that.CATEGORIES.indexOf(elem) == -1;
+        });
     }
 
-    function removeFeed (feedId) {
-        return $http.delete("/deleteFeed/" + feedId).then(function (res) {
+    /* dashboard */
+
+    this.getArticlesById = function (feedId){
+        var result = null;
+        angular.forEach(that.feeds, function(feed){
+            angular.forEach(feed.feedItems, function(item){
+                if(item._id == feedId) {
+                    result = {
+                        title    : item.title,
+                        articles : item.articles
+                    }
+                }
+            });
+        });
+        return result;
+    };
+
+    this.getAllArticles = function(){
+        var result = [];
+        angular.forEach(that.feeds, function(feed){
+            angular.forEach(feed.feedItems, function(item){
+                result.push(item.articles)
+            });
+        });
+        result = [].concat.apply([], result);
+        return result;
+    };
+
+    
+    /* Server queries */
+
+    this.getSavedFeed = function (url, category) {
+        return $http.post('/saveFeed', { url : url, category: category}).then(function(response){
+           return response.data;
+        })
+    };
+
+    this.getAllFeeds = function () {
+        return $http.get('/getAllFeeds').then(function(response){
+            angular.copy(response.data, that.feeds);
+            return response.data;
+        })
+    };
+
+    this.getSingleArticle = function (articleId) {
+        return $http.get("/getSingleArticle/" + articleId).then(function (response) {
+            return response.data;
+        });
+    };
+
+    this.removeFeed = function  (feedId) {
+        return $http.delete("/removeFeed/" + feedId).then(function (res) {
         }, function (err) {
             console.log(err);
         });
-    }
+    };
 
-
-    function getAllFeeds() {
-        return $http.get('/getAllFeeds').then(function(response){
+    this.updateFeeds = function () {
+        return $http.post('/updateFeeds').then(function(response){
             return response.data;
         })
-    }
-
-    function getParsedFeeds(url) {
-        return $http.post('/getParsedFeed', {url:url}).then(function(response){
-            saveFeed(createFeedItemsArray(response.data.feed), response.data.feed[0]['meta']['rss:title']['#'], feedCategory)
-        })
-    }
-
-    function saveFeed(entries, title, category) {
-        return $http.post('/addFeed', {entries: entries, title: title, category : category})
-            .then(function(res) {
-                    console.log("response in getSavedFeed:", res);
-                    $window.location.href = '/';
-                    return res;
-            },function(error) {
-                    console.log('Can not get saved feed');
-            })
-    }
-
-
-    function createFeedItemsArray(data) {
-        var feedItems = [];
-        angular.forEach(data, function (item){
-            var feedItem = {
-                title   : item.title,
-                link    : item.link,
-                img     : getImageSrc(item),
-                content : getInnerText(item.description),
-                date    : Date.parse(item.date)
-        };
-            feedItems.push(feedItem);
-        });
-        return feedItems.slice(0, 10);
-    }
-
-    function getInnerText(str) {
-        return str.replace(/<[^>]+>/gm, '');
-    }
-
-    function getImageSrc(item) {
-        var src;
-        switch (true) {
-            case "rss:enclosure" in item :
-                src = item.enclosures[0].url;
-               break;
-            case "media:content" in item || "media:thumbnail" in item :
-                src = item.image.url;
-                break;
-            default:
-                try {
-                    var description = item.description;
-                    var regex = /src\s*=\s*"(.+?)"/;
-                    src = regex.exec(description)[1];
-                }
-                catch (e){
-                    if (src == "" || typeof (src) == 'undefined') {
-                        src = "./img/dummy.png";
-                    }
-                }
-        }
-        return src;
-    }
-
-    function getCategories(){
-        return categories;
-    }
-
-    function getFeeds(){
-        return feeds;
-    }
-
-    return {
-        getCategories   : getCategories,
-        getFeeds        : getFeeds,
-        getParsedFeeds  : getParsedFeeds,
-        addNewCategory  : addNewCategory,
-        setFeedCategory : setFeedCategory,
-        getAllFeeds     : getAllFeeds,
-        removeFeed      : removeFeed
     };
+
 
 }]);

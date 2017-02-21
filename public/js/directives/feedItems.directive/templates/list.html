@@ -1,7 +1,8 @@
 <div class="inner">
     <div class="row">
+        <a data-ui-sref="dashboard.fullPost({feedId: feed._id})">
         <div class="col-lg-11 col-xs-10">
-            <div class="feed-item-content">
+           <div class="feed-item-content">
                 <div class="article-title">
                     <h3><img class="favicon"  ng-src="https://www.google.com/s2/favicons?domain={{feed.link}}">{{feed.title}}</h3>
                 </div>
@@ -20,5 +21,6 @@
                 </div>
             </div><!-- feed-item-footer -->
         </div>
+        </a>
     </div>
 </div><!--inner-->

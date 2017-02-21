@@ -1,32 +1,24 @@
 angular.module('rssReader').controller('AddFeedController', ['$scope', '$state', 'feedDataService', function ($scope, $state, feedDataService) {
 
-    $scope.categories = feedDataService.getCategories();
+    $scope.categories = feedDataService.getAllCategories();
+
+    $scope.checkIfCustom = function () {
+        return $scope.selectedCategory ? $scope.selectedCategory.toLowerCase() == 'custom' : false
+    };
+
+    $scope.getFeedCategory = function() {
+        return $scope.checkIfCustom() ? $scope.newCustomCategory : $scope.selectedCategory;
+    };
 
     $scope.getFeeds = function() {
-        feedDataService.getParsedFeeds($scope.feedLink);
-    };
-
-    $scope.customCategory = false;
-    $scope.checkIfCustom = function () {
-       $scope.customCategory = $scope.selectedCategory.toLowerCase() == 'custom';
-    };
-
-    $scope.addNewCategory = function () {
-        feedDataService.addNewCategory($scope.newCustomCategory);
-    };
-
-    $scope.setFeedCategory = function() {
-        if ($scope.customCategory){
-            $scope.addNewCategory();
-            feedDataService.setFeedCategory($scope.newCustomCategory);
-        }else{
-            feedDataService.setFeedCategory($scope.selectedCategory);
-        }
+        feedDataService.getSavedFeed($scope.feedLink, $scope.getFeedCategory()).then(function(res){
+            $state.go('dashboard.th-large', { type: 'feed', feed: res.feedId}, {reload: true});
+        });
     };
 
     $scope.validation = function(){
         $scope.submitted = true;
-        if($scope.feedLink && $scope.selectedCategory && ($scope.customCategory ?  $scope.newCustomCategory : true)){
+        if($scope.feedLink && $scope.selectedCategory && ($scope.checkIfCustom() ?  $scope.newCustomCategory : true)){
             $scope.addNewFeed();
         }else {
         }
@@ -34,8 +26,6 @@ angular.module('rssReader').controller('AddFeedController', ['$scope', '$state',
 
    $scope.addNewFeed = function () {
        $scope.getFeeds();
-       $scope.setFeedCategory();
-       $state.go('dashboard.th-large', { type: 'all', feed: null});
     }
 
 }]);

@@ -3,10 +3,11 @@ var mongoose = require('mongoose'),
 	router = express.Router(),
 	feedCtrl = require('../controllers/feeds');
 
-router.post('/getParsedFeed', feedCtrl.getParsedFeed);
-router.post('/addFeed', feedCtrl.addFeed);
+router.post('/saveFeed', feedCtrl.saveFeed);
+router.post('/updateFeeds', feedCtrl.updateFeeds);
 
 router.get('/getAllFeeds', feedCtrl.getAllFeeds);
+router.get('/getSingleArticle/:id', feedCtrl.getSingleArticle);
 
 router.delete('/removeFeed/:id', feedCtrl.removeFeed);
 

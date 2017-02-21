@@ -15,7 +15,7 @@ rssReader.controller('SidebarController', ['$scope', '$state', '$stateParams', '
     });
 
     $scope.getItemsByFeed = function (selectedFeed){
-        $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed});
+        $state.go('dashboard.th-large', { type: 'feed', feed: selectedFeed}, {reload: true});
     };
 
     $scope.getAllFeedItems = function (){
